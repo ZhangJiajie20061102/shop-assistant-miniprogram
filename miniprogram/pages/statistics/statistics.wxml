@@ -1,0 +1,58 @@
+<view style="padding: 20rpx; background: #f5f7fa; min-height: 100vh;">
+
+<!-- 加载中 -->
+<view wx:if="{{loading}}" style="text-align: center; padding: 60rpx 0;">
+  <van-loading size="36rpx">加载中...</van-loading>
+</view>
+
+<!-- 顶部统计卡片 -->
+<view style="display: flex; flex-wrap: wrap; gap: 20rpx; margin-bottom: 30rpx;">
+  <view style="flex: 1; min-width: 40%; background: white; border-radius: 16rpx; padding: 30rpx 20rpx; text-align: center;">
+    <text style="font-size: 24rpx; color: #999;">总营业额</text>
+    <text style="display: block; font-size: 40rpx; font-weight: bold; color: #2b6cff;">¥{{totalRevenue}}</text>
+  </view>
+  <view style="flex: 1; min-width: 40%; background: white; border-radius: 16rpx; padding: 30rpx 20rpx; text-align: center;">
+    <text style="font-size: 24rpx; color: #999;">总成本</text>
+    <text style="display: block; font-size: 40rpx; font-weight: bold; color: #fa5151;">¥{{totalCost}}</text>
+  </view>
+  <view style="flex: 1; min-width: 40%; background: white; border-radius: 16rpx; padding: 30rpx 20rpx; text-align: center;">
+    <text style="font-size: 24rpx; color: #999;">总利润</text>
+    <text style="display: block; font-size: 40rpx; font-weight: bold; color: #07c160;">¥{{totalProfit}}</text>
+  </view>
+  <view style="flex: 1; min-width: 40%; background: white; border-radius: 16rpx; padding: 30rpx 20rpx; text-align: center;">
+    <text style="font-size: 24rpx; color: #999;">毛利率</text>
+    <text style="display: block; font-size: 40rpx; font-weight: bold; color: #ff976a;">{{grossMargin}}%</text>
+  </view>
+</view>
+
+<view style="background: white; border-radius: 16rpx; padding: 20rpx 24rpx; margin-bottom: 30rpx; font-size: 26rpx; color: #666;">
+  统计口径：全部 {{totalOrders}} 笔销售记录
+</view>
+
+<!-- 趋势图 -->
+<view style="background: white; border-radius: 16rpx; padding: 20rpx; margin-bottom: 30rpx;">
+  <text style="font-size: 30rpx; font-weight: bold; display: block; margin-bottom: 20rpx;">📈 近7天销售趋势</text>
+  <!-- ec-canvas 高度是 100%，父容器必须给高度，否则画布高度为 0 什么都看不到 -->
+  <view style="width: 100%; height: 420rpx;">
+    <ec-canvas id="chart" canvas-id="chart" ec="{{ ec }}"></ec-canvas>
+  </view>
+</view>
+
+<!-- 热销商品排行 -->
+<view style="background: white; border-radius: 16rpx; padding: 30rpx 20rpx;">
+  <text style="font-size: 30rpx; font-weight: bold; display: block; margin-bottom: 20rpx;">🏆 热销商品排行</text>
+
+  <view
+    wx:for="{{rankings}}"
+    wx:key="productId"
+    style="display: flex; justify-content: space-between; align-items: center; padding: 20rpx 0; border-bottom: 1rpx solid #f0f0f0;"
+  >
+    <text style="font-size: 28rpx; flex: 1;">{{index+1}}. {{item.productName}}</text>
+    <text style="font-size: 24rpx; color: #999; margin-right: 20rpx;">¥{{item.totalAmount}}</text>
+    <text style="font-size: 28rpx; color: #2b6cff;">销量 {{item.totalQuantity}}</text>
+  </view>
+
+  <van-empty wx:if="{{rankings.length === 0}}" description="暂无销售数据" />
+</view>
+
+</view>

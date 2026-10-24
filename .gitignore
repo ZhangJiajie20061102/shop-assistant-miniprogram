@@ -1,0 +1,21 @@
+# 依赖与构建产物
+node_modules/
+miniprogram_npm/
+package-lock.json
+
+# 开发者工具本地配置
+project.private.config.json
+
+# 未使用的旧副本（1.4MB，页面里没有任何引用）
+miniprogram/vant/
+
+# quickstart 残留示例资源，仅 pages/example 使用
+miniprogram/images/
+miniprogram/pages/example/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

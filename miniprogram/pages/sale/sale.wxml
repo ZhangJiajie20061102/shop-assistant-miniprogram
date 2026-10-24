@@ -1,0 +1,60 @@
+<view style="padding: 30rpx; background: #f7f8fa; min-height: 100vh;">
+  <van-cell-group inset>
+    <!-- 商品名称（只读显示） -->
+    <van-field
+      value="{{ productName }}"
+      label="商品"
+      placeholder="请从商品列表进入"
+      readonly
+    />
+    <!-- 当前库存 -->
+    <van-field
+      value="{{ currentStock }}"
+      label="当前库存"
+      readonly
+    />
+    <!-- 销售数量（步进器） -->
+    <view style="display: flex; align-items: center; padding: 20rpx 0; justify-content: space-between;">
+      <text style="font-size: 32rpx; color: #333;">销售数量</text>
+      <van-stepper
+        value="{{ quantity }}"
+        bind:change="onQuantityChange"
+        min="{{ maxStock > 0 ? 1 : 0 }}"
+        max="{{ maxStock }}"
+        disabled="{{ maxStock <= 0 }}"
+      />
+    </view>
+    <!-- 销售单价（可修改） -->
+    <van-field
+      value="{{ salePrice }}"
+      type="digit"
+      label="销售单价"
+      placeholder="请输入售价"
+      bind:change="onPriceChange"
+    />
+    <!-- 合计金额 -->
+    <van-field
+      value="{{ total }}"
+      label="合计"
+      readonly
+    />
+  </van-cell-group>
+
+  <!-- 库存为 0 的提示 -->
+  <view wx:if="{{ maxStock <= 0 }}" style="margin: 30rpx 20rpx 0; font-size: 26rpx; color: #ee0a24;">
+    当前库存为 0，请先到「进货入库」补货后再销售。
+  </view>
+
+  <van-button
+    type="primary"
+    size="large"
+    round
+    block
+    loading="{{ submitting }}"
+    disabled="{{ submitting || maxStock <= 0 }}"
+    bindtap="submitSale"
+    custom-style="margin: 40rpx 20rpx;"
+  >
+    {{ submitting ? '处理中...' : '确认销售' }}
+  </van-button>
+</view>

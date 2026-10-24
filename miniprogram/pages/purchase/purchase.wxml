@@ -1,0 +1,64 @@
+<view style="padding: 24rpx; background: #f7f8fa; min-height: 100vh;">
+
+  <view class="card">
+    <text class="title">📦 新增进货</text>
+
+    <!-- 商品搜索（模糊匹配，输入停止 300ms 后才查询） -->
+    <input
+      class="input-field"
+      placeholder="搜索商品名称（支持模糊匹配）"
+      value="{{searchKey}}"
+      bindinput="searchInput"
+    />
+
+    <view wx:if="{{searching}}" class="hint">搜索中...</view>
+
+    <!-- 搜索结果 -->
+    <view wx:if="{{results.length > 0}}" class="result-list">
+      <view
+        wx:for="{{results}}"
+        wx:key="_id"
+        class="result-item"
+        bindtap="selectProduct"
+        data-index="{{index}}"
+      >
+        <text class="result-name">{{item.name}}</text>
+        <text class="result-meta">{{item.category}} · 库存 {{item.stock || 0}}</text>
+      </view>
+    </view>
+
+    <!-- 已选中的商品 -->
+    <view wx:if="{{selectedProduct}}" class="selected-item">
+      <view class="selected-info">
+        <text class="selected-name">{{selectedProduct.name}}</text>
+        <text class="selected-meta">当前库存：{{selectedProduct.stock || 0}}</text>
+      </view>
+      <text class="clear-btn" bindtap="clearSelected">重选</text>
+    </view>
+
+    <input
+      class="input-field"
+      type="digit"
+      placeholder="进货数量"
+      value="{{quantity}}"
+      bindinput="quantityInput"
+    />
+
+    <input
+      class="input-field"
+      type="digit"
+      placeholder="进货单价（每件）"
+      value="{{price}}"
+      bindinput="priceInput"
+    />
+
+    <button
+      class="btn-primary"
+      loading="{{submitting}}"
+      disabled="{{submitting}}"
+      bindtap="submitPurchase"
+    >
+      {{submitting ? '处理中...' : '确认进货'}}
+    </button>
+  </view>
+</view>

@@ -1,0 +1,100 @@
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+}
+
+.title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1a1a2e;
+  margin-bottom: 30rpx;
+}
+
+.input-field {
+  height: 88rpx;
+  border: 1px solid #e5e5e5;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  margin-bottom: 24rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  background: #fafafa;
+}
+
+.hint {
+  font-size: 24rpx;
+  color: #999;
+  margin: -8rpx 0 16rpx;
+}
+
+.result-list {
+  margin: -8rpx 0 24rpx;
+  border: 1px solid #eee;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.result-item {
+  padding: 22rpx 24rpx;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-name {
+  display: block;
+  font-size: 28rpx;
+  color: #1a1a2e;
+}
+
+.result-meta {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.selected-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #eef4ff;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.selected-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #2b6cff;
+}
+
+.selected-meta {
+  font-size: 22rpx;
+  color: #6b7a99;
+  margin-top: 6rpx;
+}
+
+.clear-btn {
+  font-size: 24rpx;
+  color: #2b6cff;
+}
+
+.btn-primary {
+  margin-top: 10rpx;
+  color: #ffffff;
+  background: #2b6cff;
+  border-radius: 12rpx;
+}
+
+.btn-primary[disabled] {
+  opacity: 0.6;
+}

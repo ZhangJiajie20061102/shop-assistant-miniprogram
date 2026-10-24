@@ -1,0 +1,29 @@
+<view style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 40rpx; box-sizing: border-box;">
+
+  <text style="font-size: 48rpx; font-weight: bold; color: #ffffff; margin-bottom: 40rpx;">店铺经营助手</text>
+
+  <!-- 今日概览 -->
+  <view style="display: flex; width: 100%; background: rgba(255, 255, 255, 0.08); border-radius: 16rpx; padding: 30rpx 0; margin-bottom: 60rpx;">
+    <view style="flex: 1; text-align: center;">
+      <text style="font-size: 22rpx; color: #b0b0c0;">今日销售额</text>
+      <text style="display: block; font-size: 36rpx; font-weight: bold; color: #ffffff; margin-top: 8rpx;">¥{{todayAmount}}</text>
+    </view>
+    <view style="flex: 1; text-align: center;">
+      <text style="font-size: 22rpx; color: #b0b0c0;">今日订单</text>
+      <text style="display: block; font-size: 36rpx; font-weight: bold; color: #ffffff; margin-top: 8rpx;">{{todayOrders}}</text>
+    </view>
+    <view style="flex: 1; text-align: center;">
+      <text style="font-size: 22rpx; color: #b0b0c0;">库存预警</text>
+      <text style="display: block; font-size: 36rpx; font-weight: bold; color: {{lowStockCount > 0 ? '#ff976a' : '#ffffff'}}; margin-top: 8rpx;">{{lowStockCount}}</text>
+    </view>
+  </view>
+
+  <van-button type="primary" size="large" round block bindtap="goProduct">商品管理</van-button>
+
+  <van-button type="success" size="large" round block bindtap="goPurchase" custom-style="margin-top: 20rpx;">📥 进货入库</van-button>
+
+  <van-button type="warning" size="large" round block bindtap="goSaleList" custom-style="margin-top: 20rpx;">📋 销售记录</van-button>
+
+  <van-button type="info" size="large" round block bindtap="goStatistics" custom-style="margin-top: 20rpx;">📊 经营分析</van-button>
+
+</view>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "ec-canvas": "/components/ec-canvas/ec-canvas",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "navigationBarTitleText": "经营分析"
+}

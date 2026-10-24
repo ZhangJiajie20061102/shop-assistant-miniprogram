@@ -1,0 +1,57 @@
+<view style="padding: 20rpx; background: #f7f8fa; min-height: 100vh;">
+
+  <!-- 时间范围筛选 -->
+  <view style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20rpx;">
+    <picker mode="selector" range="{{rangeLabels}}" value="{{rangeIndex}}" bindchange="onRangeChange">
+      <view style="background: #fff; border-radius: 12rpx; padding: 14rpx 24rpx; font-size: 26rpx; color: #333;">
+        {{ranges[rangeIndex].label}} ▾
+      </view>
+    </picker>
+    <text style="font-size: 24rpx; color: #999;">共 {{sales.length}} 笔</text>
+  </view>
+
+  <!-- 顶部统计概览（按当前筛选范围） -->
+  <view style="display: flex; justify-content: space-around; background: white; border-radius: 16rpx; padding: 30rpx 0; margin-bottom: 30rpx;">
+    <view style="text-align: center;">
+      <text style="font-size: 24rpx; color: #999;">销售额</text>
+      <text style="display: block; font-size: 36rpx; font-weight: bold; color: #2b6cff;">¥{{totalAmount}}</text>
+    </view>
+    <view style="text-align: center;">
+      <text style="font-size: 24rpx; color: #999;">销量</text>
+      <text style="display: block; font-size: 36rpx; font-weight: bold; color: #07c160;">{{totalQuantity}}</text>
+    </view>
+    <view style="text-align: center;">
+      <text style="font-size: 24rpx; color: #999;">毛利</text>
+      <text style="display: block; font-size: 36rpx; font-weight: bold; color: #ff976a;">¥{{totalProfit}}</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" style="text-align: center; padding: 60rpx 0;">
+    <van-loading size="36rpx">加载中...</van-loading>
+  </view>
+
+  <!-- 销售记录列表 -->
+  <view wx:for="{{sales}}" wx:key="_id" style="margin-bottom: 20rpx;">
+    <van-card
+      title="{{item.productName}}"
+      desc="数量：{{item.quantity}} 件 · 单价 ¥{{item.price}}"
+      price="{{item.total}}"
+      thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+    >
+      <view slot="tags">
+        <van-tag type="primary">合计 ¥{{item.total}}</van-tag>
+      </view>
+      <view slot="footer">
+        <text style="font-size: 24rpx; color: #999;">{{item.timeText}}</text>
+      </view>
+    </van-card>
+  </view>
+
+  <!-- 空状态 -->
+  <van-empty
+    wx:if="{{!loading && sales.length === 0}}"
+    description="该时间范围内还没有销售记录"
+  />
+
+</view>

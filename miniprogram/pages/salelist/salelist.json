@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-card": "@vant/weapp/card/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "navigationBarTitleText": "销售记录",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

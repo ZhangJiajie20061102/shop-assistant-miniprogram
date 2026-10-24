@@ -1,0 +1,51 @@
+<view class="container">
+
+<view class="title">
+  {{productId ? '编辑商品' : '添加商品'}}
+</view>
+
+<input
+  class="input"
+  placeholder="请输入商品名称"
+  value="{{name}}"
+  bindinput="nameInput"
+/>
+
+<input
+  class="input"
+  placeholder="请输入商品类别"
+  value="{{category}}"
+  bindinput="categoryInput"
+/>
+
+<input
+  class="input"
+  type="digit"
+  placeholder="请输入进货价格"
+  value="{{buyPrice}}"
+  bindinput="buyInput"
+/>
+
+<input
+  class="input"
+  type="digit"
+  placeholder="请输入销售价格"
+  value="{{salePrice}}"
+  bindinput="saleInput"
+/>
+
+<!-- 编辑时显示当前库存（库存只能通过进货/销售变动） -->
+<view wx:if="{{productId}}" class="stock-tip">
+  当前库存：{{stock}}（库存请通过进货或销售调整）
+</view>
+
+<button
+  class="save-btn"
+  loading="{{saving}}"
+  disabled="{{saving}}"
+  bindtap="saveProduct"
+>
+  {{saving ? '保存中...' : (productId ? '保存修改' : '保存商品')}}
+</button>
+
+</view>

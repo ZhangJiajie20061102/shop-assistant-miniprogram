@@ -1,0 +1,92 @@
+<view style="padding: 20rpx; background: #f7f8fa; min-height: 100vh;">
+
+<!-- 搜索栏 -->
+<view style="display: flex; align-items: center; background: #fff; border-radius: 16rpx; padding: 16rpx 20rpx; margin-bottom: 10rpx;">
+  <van-icon name="search" size="34rpx" color="#999" />
+  <input
+    style="flex: 1; margin-left: 12rpx; font-size: 28rpx;"
+    placeholder="搜索商品名称或类别"
+    value="{{keyword}}"
+    confirm-type="search"
+    bindinput="onKeywordInput"
+  />
+  <van-icon wx:if="{{keyword}}" name="clear" size="34rpx" color="#ccc" bindtap="clearKeyword" />
+</view>
+
+<!-- 顶部标题 -->
+<view style="font-size: 40rpx; font-weight: bold; padding: 26rpx 10rpx 16rpx;">
+  📋 商品列表
+  <text style="font-size: 26rpx; font-weight: normal; color: #999;">共 {{filtered.length}} 个</text>
+</view>
+
+<!-- 加载中 -->
+<view wx:if="{{loading}}" style="text-align: center; padding: 60rpx 0;">
+  <van-loading size="36rpx">加载中...</van-loading>
+</view>
+
+<!-- 循环卡片 -->
+<view wx:for="{{filtered}}" wx:key="_id" style="margin-bottom: 20rpx;">
+  <van-card
+    title="{{item.name}}"
+    desc="类别：{{item.category}}"
+    price="{{item.salePrice}}"
+    origin-price="{{item.buyPrice}}"
+    thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+  >
+    <!-- 库存标签 -->
+    <view slot="tags">
+      <van-tag wx:if="{{item.stock <= lowStock}}" type="danger">库存: {{item.stock || 0}} 偏低</van-tag>
+      <van-tag wx:else type="primary" plain>库存: {{item.stock || 0}}</van-tag>
+    </view>
+
+    <!-- 底部操作按钮：销售 + 编辑 + 删除 -->
+    <view slot="footer">
+      <van-button
+        size="small"
+        type="primary"
+        bindtap="goSale"
+        data-id="{{item._id}}"
+        custom-style="margin-right: 10rpx;"
+      >
+        销售
+      </van-button>
+      <van-button
+        size="small"
+        type="default"
+        bindtap="goEdit"
+        data-id="{{item._id}}"
+        custom-style="margin-right: 10rpx;"
+      >
+        编辑
+      </van-button>
+      <van-button
+        size="small"
+        type="danger"
+        bindtap="deleteProduct"
+        data-id="{{item._id}}"
+        data-name="{{item.name}}"
+      >
+        删除
+      </van-button>
+    </view>
+  </van-card>
+</view>
+
+<!-- 空状态 -->
+<van-empty
+  wx:if="{{!loading && filtered.length === 0}}"
+  description="{{keyword ? '没有匹配的商品' : '还没有商品，快去添加吧～'}}"
+/>
+
+<!-- 底部添加按钮 -->
+<van-button
+  type="primary"
+  size="large"
+  round
+  block
+  bindtap="goToAdd"
+  custom-style="margin-top: 30rpx; margin-bottom: 40rpx;"
+>
+  + 添加商品
+</van-button>
+</view>
